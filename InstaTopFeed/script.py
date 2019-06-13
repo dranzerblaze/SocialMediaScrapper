@@ -28,11 +28,9 @@ for tag in taglist:
 		for i in soup.findAll('time'):
 			if i.has_attr('datetime'):
 				timediff.append(i['datetime'])
-	datetimeFormat = '%Y-%m-%dT%H:%M:%S.%fZ'
-    diff = datetime.datetime.strptime(timediff[0], datetimeFormat)\
-        - datetime.datetime.strptime(timediff[1], datetimeFormat)
-    pfreq= int(diff.total_seconds()/(9))
-    tagdf.loc[len(tagdf)] = [tagname, nposts, pfreq]
+		datetimeFormat = '%Y-%m-%dT%H:%M:%S.%fZ'
+		diff = datetime.datetime.strptime(timediff[0], datetimeFormat)- datetime.datetime.strptime(timediff[1], datetimeFormat)
+		pfreq= int(diff.total_seconds()/(9))
+		tagdf.loc[len(tagdf)] = [tagname, nposts, pfreq]
 driver.quit()
 tagdf.to_csv('hashtag.csv')
-
